@@ -18,7 +18,7 @@ import com.krakedev.proyectos.services.EmpleadoService;
 @RestController
 @RequestMapping("/api/empleados")
 public class EmpleadoController {
-
+	//controller de empleado
     private final EmpleadoService empleadoService;
 
     public EmpleadoController(EmpleadoService empleadoService) {

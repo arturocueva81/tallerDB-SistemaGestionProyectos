@@ -15,7 +15,7 @@ import com.krakedev.proyectos.services.TareaService;
 @RestController
 @RequestMapping("/api/tareas")
 public class TareaController {
-
+	//controller de tarea
     private final TareaService tareaService;
 
     public TareaController(TareaService tareaService) {
