@@ -1,0 +1,3 @@
+-- paso2 Creación y Configuración de la Base de Datos: proyectos_db
+
+CREATE DATABASE proyectos_db;
