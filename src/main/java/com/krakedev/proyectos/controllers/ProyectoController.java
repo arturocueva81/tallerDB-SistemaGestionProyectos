@@ -76,6 +76,8 @@ public class ProyectoController {
 //        }
 //    }
     
+  //actualizacion de accesos de seguridad
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<?> guardar(@RequestBody Proyecto proyecto) {

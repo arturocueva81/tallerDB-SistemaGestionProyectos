@@ -76,6 +76,8 @@ public class EmpleadoController {
 //        }
 //    }
     
+  //actualizacion de accesos de seguridad
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<?> guardar(@RequestBody Empleado empleado) {

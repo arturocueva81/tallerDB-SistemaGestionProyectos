@@ -93,6 +93,7 @@ public class AuthController {
 //        }
 //    }
 	
+	
 	@GetMapping("/perfil")
 	public ResponseEntity<?> perfil() {
 	    try {

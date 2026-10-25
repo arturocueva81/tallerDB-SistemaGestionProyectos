@@ -45,6 +45,8 @@ public class TareaController {
 //        }
 //    }
     
+    //actualizacion de accesos de seguridad
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<?> guardar(@RequestBody Tarea tarea) {
