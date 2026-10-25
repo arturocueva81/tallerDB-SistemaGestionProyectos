@@ -1,6 +1,7 @@
 package com.krakedev.proyectos.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,28 +69,52 @@ public class AuthController {
         }
     }
 	
+//	@GetMapping("/perfil")
+//    public ResponseEntity<?> perfil(
+//            @RequestHeader(value = "Authorization", required = false) String authHeader) {
+//        try {
+//            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+//                return ResponseEntity.badRequest().body("Token no proporcionado o formato incorrecto.");
+//            }
+//
+//            String token = authHeader.substring(7);
+//
+//            if (blacklistService.estaInvalidado(token)) {
+//                return ResponseEntity.status(401).body("Token invalidado. Inicia sesión nuevamente.");
+//            }
+//
+//            String username = JwtUtil.obtenerUsername(token);
+//            String rol = JwtUtil.obtenerRol(token);
+//
+//            return ResponseEntity.ok("Usuario: " + username + " | Rol: " + rol);
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError()
+//                    .body("Error al obtener el perfil: " + e.getMessage());
+//        }
+//    }
+	
 	@GetMapping("/perfil")
-    public ResponseEntity<?> perfil(
-            @RequestHeader(value = "Authorization", required = false) String authHeader) {
-        try {
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return ResponseEntity.badRequest().body("Token no proporcionado o formato incorrecto.");
-            }
+	public ResponseEntity<?> perfil() {
+	    try {
+	        String username = SecurityContextHolder.getContext()
+	                .getAuthentication()
+	                .getName();
 
-            String token = authHeader.substring(7);
+	        String rol = SecurityContextHolder.getContext()
+	                .getAuthentication()
+	                .getAuthorities()
+	                .iterator()
+	                .next()
+	                .getAuthority();
 
-            if (blacklistService.estaInvalidado(token)) {
-                return ResponseEntity.status(401).body("Token invalidado. Inicia sesión nuevamente.");
-            }
-
-            String username = JwtUtil.obtenerUsername(token);
-            String rol = JwtUtil.obtenerRol(token);
-
-            return ResponseEntity.ok("Usuario: " + username + " | Rol: " + rol);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body("Error al obtener el perfil: " + e.getMessage());
-        }
-    }
+	        return ResponseEntity
+	        		.ok("Usuario: " + username + 
+	        			" | Rol: " + rol
+	        			);
+	    } catch (Exception e) {
+	        return ResponseEntity.internalServerError()
+	                .body("Error al obtener el perfil: " + e.getMessage());
+	    }
+	}
 
 }
